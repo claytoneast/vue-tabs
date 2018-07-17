@@ -11,13 +11,13 @@
         >
          {{index}} {{ tab.linkText }}
         </a>
-        <div class='nav-marker'>
+        <div class='nav-indicator'>
         </div>
       </div>
     </div>
 
     <div class='panes-wrapper'>
-      <slot name='tabs'>
+      <slot>
       </slot>
     </div>
   </div>
@@ -42,22 +42,19 @@ export default {
       this.animationDirection = (nextIndex > prevIndex ? 'left' : 'right')
       this.$nextTick(() => {
         this.activeHash = newHash
-        this.positionMenuMarker()
+        this.moveNavIndicator()
       })
     },
 
-    positionMenuMarker: async function() {
-      await this.$nextTick()
-      const activeIndex = this.tabs.indexOf(
-        this.tabs.find(tab => tab.hash === this.activeHash)
-      )
+    moveNavIndicator: function() {
+      const activeLinkIndex = this.tabs.findIndex(tab => tab.hash === this.activeHash)
       const navLinks = document.getElementsByClassName('nav-link')
-      const activeLink = navLinks[activeIndex]
+      const activeLink = navLinks[activeLinkIndex]
       const linkWidth = activeLink.offsetWidth
       const linkOffset = activeLink.offsetLeft
-      const marker = document.getElementsByClassName('nav-marker')[0]
-      marker.style.transform = `translateX(${linkOffset}px)`
-      marker.style.width = `${linkWidth}px`
+      const navIndicator = document.getElementsByClassName('nav-indicator')[0]
+      navIndicator.style.transform = `translateX(${linkOffset}px)`
+      navIndicator.style.width = `${linkWidth}px`
     }
   },
 
@@ -76,22 +73,14 @@ export default {
     return { currentTab }
   },
 
-  // watch: {
-  //   activeHash: function(next, prev) {
-  //     this.positionMenuMarker()
-  //   }
-  // },
-
   mounted() {
-    this.tabs = this.$children.map(tab => {
+    this.tabs = this.$children.map((tab) => {
       return {
         hash: tab.hash,
         linkText: tab.linkText
       }
     })
-    this.activeHash = this.tabs[0].hash
-    this.updateCurrentTab(this.activeHash)
-    this.positionMenuMarker()
+    this.updateCurrentTab(this.tabs[0].hash)
   }
 }
 </script>
@@ -118,7 +107,7 @@ export default {
   position: relative;
 }
 
-.nav-marker {
+.nav-indicator {
   height: 3px;
   background: magenta;
   position: absolute;

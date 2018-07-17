@@ -2,8 +2,8 @@
 	<transition :name='animationName'>
 		<div v-if='active' class='tab-wrapper'>
 			<h1>Tab Content {{ linkText }}</h1>
-			<slot name='body'>
-        wadafa
+			<slot>
+        Default Slot Content
 			</slot>
 		</div>
 	</transition>

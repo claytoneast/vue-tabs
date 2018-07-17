@@ -2,26 +2,17 @@
   <div id="app">
     <img width="25%" src="./assets/logo.png">
     <tabs>
-      <div slot='tabs'>
-        <tab key='20498023485' link-text='tab0' hash='20498023485'>
-          <div slot='body'>
-            tab 0 content
-          </div>
-        </tab>
+      <tab link-text='tab0' hash='20498023485'>
+        tab 0 content
+      </tab>
 
-        <tab key='2058329085' link-text='tab1' hash='2058329085'>
-          <div slot='body'>
-            tab 1 content
-          </div>
-        </tab>
+      <tab link-text='tab1' hash='2058329085'>
+        tab 1 content
+      </tab>
 
-        <tab key='90338388' link-text='tab2 link' hash='90338388'>
-          <div slot='body'>
-            tab 2 content
-          </div>
-        </tab>
-      </div>
-
+      <tab link-text='tab2 link' hash='90338388'>
+        tab 2 content
+      </tab>
     </tabs>
   </div>
 </template>
